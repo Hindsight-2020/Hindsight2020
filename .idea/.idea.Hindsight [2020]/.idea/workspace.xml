@@ -20,12 +20,15 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:Combat" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b41e8d6f-8c88-4650-8e2e-016f61009d5c" name="Default Changelist" comment="Imported Project Assets" />
+    <list default="true" id="b41e8d6f-8c88-4650-8e2e-016f61009d5c" name="Default Changelist" comment="Merged Combat and Master">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Hindsight [2020]/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Hindsight [2020]/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +42,14 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.git/info/exclude" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectId" id="1inTP96zpBt2GkYnhx4PQXubcIj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -48,6 +59,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="RiderNuGetOptionsPageId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -71,6 +85,9 @@
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="b41e8d6f-8c88-4650-8e2e-016f61009d5c" name="Default Changelist" comment="" />
@@ -87,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602543519985</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Merged Combat and Master">
+      <created>1602545254421</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602545254421</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,7 +130,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Combat" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -122,13 +146,18 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Imported Project Assets" />
-    <option name="LAST_COMMIT_MESSAGE" value="Imported Project Assets" />
+    <MESSAGE value="Merged Combat and Master" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged Combat and Master" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="240" y="123" key="Vcs.Push.Dialog.v2" timestamp="1602543537190">
+    <state x="149" y="23" width="982" height="721" key="SettingsEditor" timestamp="1602545834024">
       <screen x="0" y="23" width="1280" height="721" />
     </state>
-    <state x="240" y="123" key="Vcs.Push.Dialog.v2/0.23.1280.721@0.23.1280.721" timestamp="1602543537190" />
+    <state x="149" y="23" width="982" height="721" key="SettingsEditor/0.23.1280.721@0.23.1280.721" timestamp="1602545834024" />
+    <state x="240" y="123" key="Vcs.Push.Dialog.v2" timestamp="1602545261907">
+      <screen x="0" y="23" width="1280" height="721" />
+    </state>
+    <state x="240" y="123" key="Vcs.Push.Dialog.v2/0.23.1280.721@0.23.1280.721" timestamp="1602545261907" />
     <state x="453" y="304" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602543476602">
       <screen x="0" y="23" width="1280" height="721" />
     </state>
