@@ -616,8 +616,8 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
-    Build: 1
-    Collab: 1
+    Build: 0
+    Collab: 0
     UNet: 1
   luminIcon:
     m_Name: 
@@ -631,7 +631,7 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 59702719-6bf2-49b4-996f-3e44a8af351d
+  cloudProjectId: 4202de3e-0912-4fe0-8632-17a5619146c7
   framebufferDepthMemorylessMode: 0
   projectName: Hindsight [2020]
   organizationId: dpearson2699
