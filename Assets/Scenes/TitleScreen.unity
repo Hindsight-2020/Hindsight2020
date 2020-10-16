@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 242426806}
   - component: {fileID: 242426805}
   m_Layer: 0
-  m_Name: mountain01 (2)
+  m_Name: mountainLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 334864266}
   - component: {fileID: 334864265}
   m_Layer: 0
-  m_Name: cloud3
+  m_Name: c3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 1043410223}
   - component: {fileID: 1043410222}
   m_Layer: 0
-  m_Name: cloud4
+  m_Name: c4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1134,7 +1134,7 @@ GameObject:
   - component: {fileID: 1355617860}
   - component: {fileID: 1355617859}
   m_Layer: 0
-  m_Name: mountain01
+  m_Name: mountainRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1293,7 +1293,7 @@ GameObject:
   - component: {fileID: 1410385293}
   - component: {fileID: 1410385292}
   m_Layer: 0
-  m_Name: cloud5
+  m_Name: c5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1571,7 +1571,7 @@ GameObject:
   - component: {fileID: 1662588907}
   - component: {fileID: 1662588906}
   m_Layer: 0
-  m_Name: mountain01 (1)
+  m_Name: mountainFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1652,7 +1652,7 @@ GameObject:
   - component: {fileID: 1872415538}
   - component: {fileID: 1872415537}
   m_Layer: 0
-  m_Name: cloud2
+  m_Name: c2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
