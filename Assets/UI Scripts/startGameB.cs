@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class startGameB : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class startGameB : MonoBehaviour
         _pos = GameObject.Find("startGame").transform.position;
         button = GameObject.Find("startGame");
 
-        clouds = new GameObject[5];
+        clouds = new GameObject[6];
         mountains = new GameObject[3];
         mxs = new float[3];
         
@@ -28,6 +29,7 @@ public class startGameB : MonoBehaviour
         clouds[2] = GameObject.Find("c3");
         clouds[3] = GameObject.Find("c4");
         clouds[4] = GameObject.Find("c5");
+        clouds[5] = GameObject.Find("c6");
 
         mountains[0] = GameObject.Find("mountainFront");
         mountains[1] = GameObject.Find("mountainLeft");
@@ -66,14 +68,14 @@ public class startGameB : MonoBehaviour
         {
             var p = cloud.transform.position;
             cloud.transform.position = new Vector3(
-                    p.x+Time.fixedDeltaTime*(Random.value*5),
+                    p.x+Time.fixedDeltaTime*(5),
                     p.y,
                     p.z);
 
             if (p.x > -160)
                 cloud.transform.position = new Vector3(
-                    -875,
-                    p.y,
+                    -930+(Random.value*20-10),
+                     p.y+(Random.value*20-10),
                     p.z);
         }
         
@@ -81,7 +83,6 @@ public class startGameB : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("Does this work now");
-        //Load next screen aka character selection
+        SceneManager.LoadScene("CreateCharacter");
     }
 }
