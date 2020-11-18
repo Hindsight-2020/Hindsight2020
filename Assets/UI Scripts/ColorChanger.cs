@@ -21,6 +21,8 @@ public class ColorChanger : MonoBehaviour
         
     }
 
+    
+
     public void updateHatBlue(float value)
     {
         Color c = desatHat_0.GetComponent<SpriteRenderer>().material.color;

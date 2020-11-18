@@ -1,17 +1,14 @@
 ﻿using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 
-
-
-public static class Database 
+public static class saveLoad 
 {
     public static void SaveData(Character character)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/HS.sav";
-  
+
         FileStream stream = new FileStream(path, FileMode.Create);
 
         CharacterData charData = new CharacterData(character);
@@ -41,5 +38,3 @@ public static class Database
         }
     }
 }
-
-//vttps://weeklyhow.com/how-to-save-load-game-in-unity/
