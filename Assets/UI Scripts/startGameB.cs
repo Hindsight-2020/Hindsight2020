@@ -12,6 +12,8 @@ public class startGameB : MonoBehaviour
     private GameObject[] clouds;
     private GameObject[] mountains;
 
+    private bool mov = true;
+    
     private float[] mxs;
     
     void Start()
@@ -41,11 +43,17 @@ public class startGameB : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    public void movP(bool p)
+    {
+        mov = p;
+    }
+    
     void Update()
     {
-        var frontParrallax = Input.mousePosition.x/600 * 10 - 5;
-        var backParrallax = Input.mousePosition.x/600 * 2 - 1;
+        if (mov)
+        {
+            var frontParrallax = Input.mousePosition.x/600 * 10 - 5;
+            var backParrallax = Input.mousePosition.x/600 * 2 - 1;
         
             mountains[0].transform.position = new Vector3(
                 mxs[0]+frontParrallax,
@@ -62,7 +70,7 @@ public class startGameB : MonoBehaviour
                 mountains[2].transform.position.y,
                 mountains[2].transform.position.z
             );
-        
+        }
         
         foreach (var cloud in clouds)
         {
