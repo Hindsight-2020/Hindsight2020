@@ -8,13 +8,30 @@ public class Settings : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject mF, mR, mL, SG, Title, clusster;
+    public Character c;
     private bool mov;
 
     void Start()
     {
+        var c = saveLoad.LoadData();
+        var m = GameObject.Find("music");
+        var s = GameObject.Find("sound");
+        var t = GameObject.Find("Title Screen");
         
+        m.GetComponent<Slider>().value = c.music;
+        s.GetComponent<Slider>().value = c.sound;
+
+        t.GetComponent<AudioSource>().volume = c.music;
+
+
     }
 
+    public void updateMusic(float m)
+    {
+        var t = GameObject.Find("Title Screen");
+        t.GetComponent<AudioSource>().volume = c.music;
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -65,5 +82,12 @@ public class Settings : MonoBehaviour
     public void onClick(bool t)
     {
         mov = t;
+        
+    }
+
+    public void OnClickApply()
+    {
+        mov = false;
+        saveLoad.SaveData(c);
     }
 }
