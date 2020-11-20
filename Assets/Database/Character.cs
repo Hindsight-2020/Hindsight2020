@@ -11,6 +11,9 @@ public class Character : MonoBehaviour
     public float hat_R = -1;
     public float hat_G = -1;
     public float hat_B = -1;
+
+    public float music = 0.5f;
+    public float sound = 0.5f;
     
     private GameObject desatHat_0;
     private GameObject desatHat_4;
@@ -32,6 +35,9 @@ public class Character : MonoBehaviour
             hat_B = l.hat_B;
             hat_G = l.hat_G;
 
+            music = l.music;
+            sound = l.sound;
+            
             c_name = l.name;
             
             desatHat_0.GetComponent<SpriteRenderer>().material.color = new Color(hat_R,hat_G,hat_B);
@@ -55,27 +61,30 @@ public class Character : MonoBehaviour
         Vector3 vertical = new Vector3(0f, Input.GetAxis("Vertical"), 0f);
         transform.position = transform.position + vertical * Time.deltaTime;
     }
-
     public void c_b(float b)
     {
         hat_B = b;
     }
-
     public void c_r(float r)
     {
         hat_R = r;
     }
-
     public void c_g(float g)
     {
         hat_G = g;
     }
-
     public void c_n (string n)
     {
         c_name = n;
     }
-
+    public void c_sound(float s)
+    {
+        sound = s;
+    }
+    public void c_music(float m)
+    {
+        music = m;
+    }
     public void saveC()
     {
         saveLoad.SaveData(this); 

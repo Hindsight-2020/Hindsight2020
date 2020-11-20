@@ -10,11 +10,17 @@ public class CharacterData
     public float hat_G;
     public float hat_B;
 
+    public float music;
+    public float sound;
     public CharacterData(Character character)
     {
         name = character.name;
         hat_R = character.hat_R;
         hat_G = character.hat_G;
         hat_B = character.hat_B;
+
+        music = character.music;
+        sound = character.sound;
+
     }
 }
