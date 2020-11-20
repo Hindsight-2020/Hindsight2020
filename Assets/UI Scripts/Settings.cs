@@ -10,7 +10,8 @@ public class Settings : MonoBehaviour
     public GameObject mF, mR, mL, SG, Title, clusster;
     public Character c;
     private bool mov;
-
+    private Text title;
+    
     void Start()
     {
         var c = saveLoad.LoadData();
@@ -24,6 +25,7 @@ public class Settings : MonoBehaviour
         t.GetComponent<AudioSource>().volume = c.music;
 
 
+        title = Title.GetComponent<Text>();
     }
 
     public void updateMusic(float m)
@@ -47,8 +49,7 @@ public class Settings : MonoBehaviour
                 this.transform.localScale = new Vector3(0,0,0);
                 SG.transform.localScale = new Vector3(0,0,0);
                 
-                
-                Title.GetComponent<Text>().text = "Settings";
+                title.text = "Settings";
             }
             else
             {
