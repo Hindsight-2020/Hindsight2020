@@ -48,14 +48,15 @@ public class Character : MonoBehaviour
     private void Update()
     {
         ani.SetFloat("Horizontal",Input.GetAxis("Horizontal"));
-        ani.SetFloat("Vertical",Input.GetAxis("Vertical"));
+        //Disable vertial interaction
+        //ani.SetFloat("Vertical",Input.GetAxis("Vertical"));
 
         if (ani.GetFloat("Horizontal") < 0)
         {
             
         }
         
-        Vector3 horizontal = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+        Vector3 horizontal = new Vector3(Input.GetAxis("Horizontal")*100, 0f, 0f);
         transform.position = transform.position + horizontal * Time.deltaTime;
         
         Vector3 vertical = new Vector3(0f, Input.GetAxis("Vertical"), 0f);
