@@ -11,14 +11,16 @@ public class Character : MonoBehaviour
     public float hat_R = -1;
     public float hat_G = -1;
     public float hat_B = -1;
+    
+    public Boolean gender;
 
+    
     public float music = 0.5f;
     public float sound = 0.5f;
     
     private GameObject desatHat_0;
     private GameObject desatHat_4;
 
-    private GameObject mainRL_0;
 
     public Animator ani;
     void Start()
@@ -26,8 +28,6 @@ public class Character : MonoBehaviour
         desatHat_0 = GameObject.Find("desatHat_0");
         desatHat_4 = GameObject.Find("desatHat_4");
 
-        mainRL_0 = GameObject.Find("mainRL_0");
-        
         CharacterData l = saveLoad.LoadData();
         if (l != null)
         {
@@ -47,20 +47,12 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        ani.SetFloat("Horizontal",Input.GetAxis("Horizontal"));
-        //Disable vertial interaction
-        //ani.SetFloat("Vertical",Input.GetAxis("Vertical"));
-
-        if (ani.GetFloat("Horizontal") < 0)
-        {
-            
-        }
         
-        Vector3 horizontal = new Vector3(Input.GetAxis("Horizontal")*100, 0f, 0f);
-        transform.position = transform.position + horizontal * Time.deltaTime;
-        
-        Vector3 vertical = new Vector3(0f, Input.GetAxis("Vertical"), 0f);
-        transform.position = transform.position + vertical * Time.deltaTime;
+    }
+    
+    public void c_gender(Boolean g)
+    {
+        gender = g;
     }
     public void c_b(float b)
     {

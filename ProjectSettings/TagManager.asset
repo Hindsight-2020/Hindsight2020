@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - SolidObjects
+  - Interactable
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 422081387
+    locked: 0
+  - name: Midground
+    uniqueID: 1264141067
+    locked: 0
+  - name: Player
+    uniqueID: 1236181411
+    locked: 0
+  - name: Foreground
+    uniqueID: 3711198859
     locked: 0
