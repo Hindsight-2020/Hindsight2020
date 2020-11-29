@@ -14,7 +14,7 @@ public class CharacterData
     public float music;
     public float sound;
 
-    //True for makle false for female
+    //True for male false for female
     public Boolean gender;
     
     public CharacterData(Character character)
@@ -26,6 +26,8 @@ public class CharacterData
 
         music = character.music;
         sound = character.sound;
+
+        gender = character.gender;
 
     }
 }
