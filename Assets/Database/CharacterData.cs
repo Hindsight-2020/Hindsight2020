@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,10 @@ public class CharacterData
 
     public float music;
     public float sound;
+
+    //True for makle false for female
+    public Boolean gender;
+    
     public CharacterData(Character character)
     {
         name = character.name;

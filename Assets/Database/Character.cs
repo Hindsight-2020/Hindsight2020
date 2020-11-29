@@ -18,7 +18,6 @@ public class Character : MonoBehaviour
     private GameObject desatHat_0;
     private GameObject desatHat_4;
 
-    private GameObject mainRL_0;
 
     public Animator ani;
     void Start()
@@ -26,8 +25,6 @@ public class Character : MonoBehaviour
         desatHat_0 = GameObject.Find("desatHat_0");
         desatHat_4 = GameObject.Find("desatHat_4");
 
-        mainRL_0 = GameObject.Find("mainRL_0");
-        
         CharacterData l = saveLoad.LoadData();
         if (l != null)
         {
