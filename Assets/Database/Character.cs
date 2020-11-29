@@ -11,7 +11,10 @@ public class Character : MonoBehaviour
     public float hat_R = -1;
     public float hat_G = -1;
     public float hat_B = -1;
+    
+    public Boolean gender;
 
+    
     public float music = 0.5f;
     public float sound = 0.5f;
     
@@ -45,6 +48,11 @@ public class Character : MonoBehaviour
     private void Update()
     {
         
+    }
+    
+    public void c_gender(Boolean g)
+    {
+        gender = g;
     }
     public void c_b(float b)
     {
