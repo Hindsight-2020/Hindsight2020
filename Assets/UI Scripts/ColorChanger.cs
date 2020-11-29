@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,8 +22,11 @@ public class ColorChanger : MonoBehaviour
         
     }
 
-    
 
+    public void updateGender(Boolean gender)
+    {
+        //True for Male False for Female
+    }
     public void updateHatBlue(float value)
     {
         Color c = desatHat_0.GetComponent<SpriteRenderer>().material.color;

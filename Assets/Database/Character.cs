@@ -39,6 +39,12 @@ public class Character : MonoBehaviour
             sound = l.sound;
             
             c_name = l.name;
+
+            gender = l.gender;
+            
+            var animator = GetComponent<Animator>();
+            Debug.Log(gender);
+            animator.SetBool("gender",gender);
             
             desatHat_0.GetComponent<SpriteRenderer>().material.color = new Color(hat_R,hat_G,hat_B);
             desatHat_4.GetComponent<SpriteRenderer>().material.color = new Color(hat_R,hat_G,hat_B);
