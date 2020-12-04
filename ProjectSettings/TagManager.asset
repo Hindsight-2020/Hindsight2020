@@ -47,6 +47,9 @@ TagManager:
   - name: Midground
     uniqueID: 1264141067
     locked: 0
+  - name: Solid
+    uniqueID: 1374334765
+    locked: 0
   - name: Player
     uniqueID: 1236181411
     locked: 0

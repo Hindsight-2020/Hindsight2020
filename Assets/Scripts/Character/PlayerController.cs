@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
                 animator.SetFloat("moveY", input.y);
                 
                 var targetPos = transform.position;
-                targetPos.x += input.x / 32;
-                targetPos.y += input.y / 32;
+                targetPos.x += input.x;
+                targetPos.y += input.y;
 
                 if (isWalkable(targetPos))
                     StartCoroutine(Move(targetPos));
@@ -44,9 +44,10 @@ public class PlayerController : MonoBehaviour
         }
 
         animator.SetBool("isMoving", isMoving);
-        
+
         if (Input.GetKeyDown(KeyCode.Z))
             Interact();
+        
     }
 
     void Interact()
@@ -67,7 +68,17 @@ public class PlayerController : MonoBehaviour
         
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
+            var sprint = false;
+            if(Input.GetKeyDown((KeyCode.LeftShift)))
+            {
+                moveSpeed = 16;
+                sprint = true;
+            }
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                moveSpeed = 4;
+            }
             yield return null;
         }
         transform.position = targetPos;
