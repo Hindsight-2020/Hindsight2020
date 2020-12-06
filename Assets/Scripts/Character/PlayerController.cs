@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
 
     public bool isMoving;
     private Vector2 input;
-
     private Animator animator;
 
     private void Awake()
