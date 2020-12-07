@@ -1,0 +1,37 @@
+WRITTEN BY TIMOTHY
+
+Game Begin
+Area 1 - Hillsborough
+	Elements: covid, toilet-paper craze
+StoryText:
+	Character wakes up at home. Leaves house to see friend. Encounters toilet-paper-crazed enemies in streets. Arrive at friend's house. They're sick with covid and won't let you in. Character decides to find the cure and sets off towards the port to go fight covid in China.
+
+Area 2 - China
+	Elements: covid
+StoryText:
+	Character passes many sick people until they find the throne of corona. Player tries to fight but corona is too strong. They are defeated and sent to Australia with the covid debuff.
+
+Area 3 - Australia
+	Elements: covid, bushfires
+StoryText:
+	Character wakes up in Australia with fire spreading around them. Encounter with an Australian who provides the character with medicine (motrin or somethin idk) which cures the debuff (either for a short time, disabling effects, or cures it until they get it again). Character fights through fires to get to town where they are directed to the nearest port, where they must fight more fires before setting off to indonesia.
+
+Area 4 - Indonesia
+	Elements: covid, flooding
+StoryText:
+	Character arrives in Indonesia due to a storm. Must navigate through the islands to find a safer port closer to the mainland. Fights water elementals and must complete a couple quests to repair bridges between each island to get to the safe port.
+
+Area 5 - California
+	Elements: covid, wildfires
+StoryText:
+	Character arrives back in the US to see that the covid situation has grown worse and now wildfires are spreading in California. Encounter a mask salesman who will trade you a mask for something (maybe a bottle of water protected by unmasked thugs idk). Once the mask is acquired, the character can then cross the border to Washington.
+
+Area 6 - Washington
+	Elements: covid?, murder hornets, wildfires
+StoryText:
+	Character walks into town to find people hiding. Is told to find cover before 'they' get them but an encounter begins with murder hornets. Afterwards, the player must quickly seek shelter with the advice of the hidden townsfolk while swarms fly overhead (constant buzzing) with occasional encounters. In the shelter, townsfolk are working on a project but cannot complete it without the players help. Player fights a fire elemental being held captive. After beating, player receives the flamethrower which does heavy damage to bugs. Player leaves shelter and must save a captain who is stuck in his office at the port who will then take the player to China. The captain's ship is full of bleach cargo.
+
+Area 8 - China
+	Elements: covid
+StoryText:
+	Player returns to China to fight corona again. This time armed with bleach. All covid elements flee from the ship full of bleach and the character uses this to their adventage. Defeats Corona and immediately transported to friends house where the character pours them a cup and they instantly feel better. Credits.

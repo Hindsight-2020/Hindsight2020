@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbf14463cb6b754289f1a8613c9c230, type: 3}
+  m_Name: Murder Hornet
+  m_EditorClassIdentifier: 
+  name: Murder Hornet
+  description: NOT THE BEEEEES!!!
+  frontSprite: {fileID: 458772410990696140, guid: 09f6a6bcaa520884589a1fe75ef10862,
+    type: 3}
+  backSprite: {fileID: 0}
+  type1: 5
+  type2: 1
+  maxHp: 50
+  attack: 15
+  defense: 3
+  spAttack: 50
+  spDefense: 15
+  speed: 30
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 13356b62cc9ee5f44b9cac58d5638863, type: 2}
+    level: 1

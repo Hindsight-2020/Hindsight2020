@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbf14463cb6b754289f1a8613c9c230, type: 3}
+  m_Name: Infected Citizen
+  m_EditorClassIdentifier: 
+  name: Infected Citizen
+  description: They're not looking so good..
+  frontSprite: {fileID: -2427781956415853871, guid: 0e230d6192eb938409ddabd906ea01f9,
+    type: 3}
+  backSprite: {fileID: 0}
+  type1: 4
+  type2: 1
+  maxHp: 50
+  attack: 5
+  defense: 1
+  spAttack: 10
+  spDefense: 3
+  speed: 3
+  learnableMoves: []

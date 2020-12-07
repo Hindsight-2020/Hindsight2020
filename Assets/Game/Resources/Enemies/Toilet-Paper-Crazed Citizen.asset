@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbf14463cb6b754289f1a8613c9c230, type: 3}
+  m_Name: Toilet-Paper-Crazed Citizen
+  m_EditorClassIdentifier: 
+  name: TP-Crazed Citizen
+  description: They've lost their marbles, but they found the toilet paper.
+  frontSprite: {fileID: 6260618585046287902, guid: 0e230d6192eb938409ddabd906ea01f9,
+    type: 3}
+  backSprite: {fileID: 0}
+  type1: 1
+  type2: 1
+  maxHp: 100
+  attack: 10
+  defense: 1
+  spAttack: 15
+  spDefense: 3
+  speed: 5
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 2bbc176a01f058843bca75f7e4d84d34, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: dc25b2bbfcdbadc4ba6e3f8359a12117, type: 2}
+    level: 4
+  - moveBase: {fileID: 11400000, guid: 3cc9ab2e4e8700c40848b836db6c5af0, type: 2}
+    level: 7
+  - moveBase: {fileID: 11400000, guid: 5548f47db9784fc428e0a14cb383c309, type: 2}
+    level: 10
