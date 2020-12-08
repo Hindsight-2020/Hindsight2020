@@ -7,6 +7,7 @@ public class TeleportTrigger : MonoBehaviour, Interactable
 {
     public GameObject thePlayer;
     public Transform TeleportGoal;
+    
     /*void OnTriggerEnter(Collider other)
     {
         thePlayer.transform.position = TeleportGoal.transform.position;

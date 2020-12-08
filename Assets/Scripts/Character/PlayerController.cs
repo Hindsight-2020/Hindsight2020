@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour
     public bool isMoving;
     private Vector2 input;
     private Animator animator;
-
+    private bool questItemFound;
+    public QuestItem WaterBottle;
+    public QuestItem Flamethrower;
+    public bool questActive;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -50,7 +53,21 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
             Interact();
+
+        if (!questItemFound && WaterBottle.itemCollected)
+        {
+            questItemFound = true;
+            Destroy(WaterBottle.gameObject);
+            questActive = true;
+        }
         
+        if (!questItemFound && Flamethrower.itemCollected)
+        {
+            questItemFound = true;
+            Destroy(Flamethrower.gameObject);
+            questActive = true;
+        }
+
     }
 
     void Interact()
