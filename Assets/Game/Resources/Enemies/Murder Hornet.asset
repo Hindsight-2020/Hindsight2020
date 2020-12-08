@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Murder Hornet
   description: NOT THE BEEEEES!!!
-  frontSprite: {fileID: 458772410990696140, guid: 09f6a6bcaa520884589a1fe75ef10862,
+  frontSprite: {fileID: 2712145497159664299, guid: 69cfcf8d434075b48ac8054c75ad7aa1,
     type: 3}
   backSprite: {fileID: 0}
   type1: 5

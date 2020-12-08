@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Water Elemental
   description: It's easy to sea where it gets its power.
-  frontSprite: {fileID: -746843418931626205, guid: 67faae03e36f3c84cb323cb061210691,
+  frontSprite: {fileID: 8365201888175232780, guid: 69cfcf8d434075b48ac8054c75ad7aa1,
     type: 3}
   backSprite: {fileID: 0}
   type1: 3

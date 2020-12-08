@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Infected Citizen
   description: They're not looking so good..
-  frontSprite: {fileID: -2427781956415853871, guid: 0e230d6192eb938409ddabd906ea01f9,
+  frontSprite: {fileID: 4330880972623375552, guid: 69cfcf8d434075b48ac8054c75ad7aa1,
     type: 3}
   backSprite: {fileID: 0}
   type1: 4

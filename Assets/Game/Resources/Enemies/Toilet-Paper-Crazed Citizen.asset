@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: TP-Crazed Citizen
   description: They've lost their marbles, but they found the toilet paper.
-  frontSprite: {fileID: 6260618585046287902, guid: 0e230d6192eb938409ddabd906ea01f9,
+  frontSprite: {fileID: 3970522341632570534, guid: 69cfcf8d434075b48ac8054c75ad7aa1,
     type: 3}
   backSprite: {fileID: 0}
   type1: 1
