@@ -103,4 +103,5 @@ public enum EnemyType
     Water,
     COVID,
     Bug,
+    Player,
 }
