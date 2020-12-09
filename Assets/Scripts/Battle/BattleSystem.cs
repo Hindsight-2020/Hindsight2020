@@ -57,6 +57,10 @@ public class BattleSystem : MonoBehaviour
         var move = playerUnit.Enemy.Moves[currentMove];
         yield return dialogBox.TypeDialog($"{playerUnit.Enemy.Base.Name} used {move.Base.Name}");
 
+        playerUnit.PlayAttackAnimation();
+        yield return new WaitForSeconds(1f);
+
+        enemyUnit.PlayHitAnimation();
         var damageDetails = enemyUnit.Enemy.TakeDamage(move, playerUnit.Enemy);
         yield return enemyHud.UpdateHP();
         yield return ShowDamageDetails(damageDetails);
@@ -64,6 +68,7 @@ public class BattleSystem : MonoBehaviour
         if (damageDetails.Fainted)
         {
             yield return dialogBox.TypeDialog($"{enemyUnit.Enemy.Base.Name} Fainted");
+            enemyUnit.PlayFaintAnimation();
         }
         else
         {
@@ -78,6 +83,10 @@ public class BattleSystem : MonoBehaviour
         var move = enemyUnit.Enemy.GetRandomMove();
         yield return dialogBox.TypeDialog($"{enemyUnit.Enemy.Base.Name} used {move.Base.Name}");
 
+        enemyUnit.PlayAttackAnimation();
+        yield return new WaitForSeconds(1f);
+
+        playerUnit.PlayHitAnimation();
         var damageDetails = playerUnit.Enemy.TakeDamage(move, playerUnit.Enemy);
         yield return playerHud.UpdateHP();
         yield return ShowDamageDetails(damageDetails);
@@ -85,6 +94,7 @@ public class BattleSystem : MonoBehaviour
         if (damageDetails.Fainted)
         {
             yield return dialogBox.TypeDialog($"{playerUnit.Enemy.Base.Name} Fainted");
+            playerUnit.PlayFaintAnimation();
         }
         else
         {
