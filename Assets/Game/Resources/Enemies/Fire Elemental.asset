@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fire Elemental
   description: It's lit.
-  frontSprite: {fileID: -9051748682659619041, guid: 09f6a6bcaa520884589a1fe75ef10862,
+  frontSprite: {fileID: 2854407852310004113, guid: 21f3b09dfc38e44ed8c91109de078de4,
     type: 3}
-  backSprite: {fileID: 0}
+  backSprite: {fileID: 2854407852310004113, guid: 21f3b09dfc38e44ed8c91109de078de4,
+    type: 3}
   type1: 2
-  type2: 1
+  type2: 2
   maxHp: 150
   attack: 15
   defense: 5
@@ -26,11 +27,11 @@ MonoBehaviour:
   spDefense: 10
   speed: 15
   learnableMoves:
-  - moveBase: {fileID: 0}
+  - moveBase: {fileID: 11400000, guid: 4e1481909d56b9242a049dea76636038, type: 2}
     level: 0
-  - moveBase: {fileID: 0}
-    level: 0
-  - moveBase: {fileID: 0}
-    level: 0
-  - moveBase: {fileID: 0}
-    level: 0
+  - moveBase: {fileID: 11400000, guid: bbaff767fc5b8df4f879ef434e36c1a5, type: 2}
+    level: 10
+  - moveBase: {fileID: 11400000, guid: 3cc9ab2e4e8700c40848b836db6c5af0, type: 2}
+    level: 20
+  - moveBase: {fileID: 11400000, guid: 163a3f56e65b76e43bf65174b96bb4aa, type: 2}
+    level: 35
