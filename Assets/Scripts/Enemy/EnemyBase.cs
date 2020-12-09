@@ -103,5 +103,28 @@ public enum EnemyType
     Water,
     COVID,
     Bug,
-    Player,
+}
+
+public class TypeChart
+{
+    static float[][] chart =
+    {
+        //                   NOR   FIR   WAT   CVD   BG                
+        /*NOR*/ new float[] { 1f,  1f,    1f,  0.5f, 1f },
+        /*FIR*/ new float[] { 1f,  1f,  0.5f,  1f,   2f },
+        /*WAT*/ new float[] { 1f,  2f,    1f,  1f,   1f },
+        /*CVD*/ new float[] { 2f,  0.5f,  1f,  1f,   1f },
+        /*BG */ new float[] { 1f,  0.5f,  1f,  2f,   1f }
+    };
+
+    public static float GetEffectiveness(EnemyType attackType, EnemyType defenseType)
+    {
+        if (attackType == EnemyType.None || defenseType == EnemyType.None)
+            return 1;
+
+        int row = (int)attackType - 1;
+        int col = (int)defenseType - 1;
+
+        return chart[row][col];
+    }
 }

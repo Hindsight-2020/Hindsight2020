@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Slash
   description: Slash your foes with your trusty sword.
-  type: 1
+  type: 5
   power: 35
   accuracy: 85
   pp: 20
