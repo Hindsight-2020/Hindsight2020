@@ -15,6 +15,10 @@ MonoBehaviour:
   name: Flame Thrower
   description: Sets ablaze whatever is in front of it. Weak against water types
   type: 2
-  power: 100
+  power: 60
   accuracy: 100
   pp: 5
+  category: 1
+  effects:
+    boosts: []
+  target: 0

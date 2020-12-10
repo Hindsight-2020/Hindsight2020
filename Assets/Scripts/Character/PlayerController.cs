@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask interactableLayer;
     public LayerMask grassLayer;
 
+    public event Action OnEncountered;
+    
     public bool isMoving;
     private Vector2 input;
     private Animator animator;
@@ -22,7 +24,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Update()
+    public void HandleUpdate()
     {
         if (!isMoving)
         {
@@ -105,10 +107,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(transform.position, 0.2f, grassLayer) != null)
         {
-            int rnd = Random.Range(1, 101);
-            if (Random.Range(1, 101) <= 10)
+            if (UnityEngine.Random.Range(1, 101) <= 10)
             {
-                Debug.Log("Encountered a creature");
+                animator.SetBool("isMoving", false);
+                OnEncountered();
             }
         }
     }

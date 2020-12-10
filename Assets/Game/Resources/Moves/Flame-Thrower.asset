@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0237869db2895b4783377e133f831b3, type: 3}
   m_Name: Flame-Thrower
   m_EditorClassIdentifier: 
-  name: Flame-Thrower
+  name: Flame Thrower
   description: Covers everything in front of the elemental in flames.
   type: 2
   power: 30
   accuracy: 90
   pp: 20
+  category: 0
+  effects:
+    boosts: []
+  target: 0

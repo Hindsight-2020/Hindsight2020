@@ -1,76 +1,95 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy}
+public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, PartyScreen, BattleOver}
 
 public class BattleSystem : MonoBehaviour
 {
     [SerializeField] BattleUnit playerUnit;
     [SerializeField] BattleUnit enemyUnit;
-    [SerializeField] BattleHud playerHud;
-    [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
-
+    [SerializeField] PartyScreen partyScreen;
+    
+    public event Action<bool> OnBattleOver;
+    
     BattleState state;
     int currentAction;
     int currentMove;
+    int currentMember;
 
-    private void Start()
+    PlayerParty playerParty;
+    Enemy wildEnemy;
+    
+    public void StartBattle(PlayerParty playerParty, Enemy wildEnemy)
     {
+        this.playerParty = playerParty;
+        this.wildEnemy = wildEnemy;
+        
         StartCoroutine(SetupBattle());
     }
 
     public IEnumerator SetupBattle()
     {
-        playerUnit.Setup();
-        enemyUnit.Setup();
-        playerHud.SetData(playerUnit.Enemy);
-        enemyHud.SetData(enemyUnit.Enemy);
+        playerUnit.Setup(playerParty.GetHealthyMember());
+        enemyUnit.Setup(wildEnemy);
 
+        partyScreen.Init();
+        
         dialogBox.SetMoveNames(playerUnit.Enemy.Moves);
 
         yield return dialogBox.TypeDialog($"A wild {enemyUnit.Enemy.Base.Name} appeared.");
 
-        PlayerAction();
+        ChooseFirstTurn();
+    }
+    
+    void ChooseFirstTurn()
+    {
+        if (playerUnit.Enemy.Speed >= enemyUnit.Enemy.Speed)
+            ActionSelection();
+        else
+            StartCoroutine(EnemyMove());
     }
 
-    void PlayerAction()
+    void BattleOver(bool won)
     {
-        state = BattleState.PlayerAction;
-        StartCoroutine(dialogBox.TypeDialog("Choose an action"));
+        state = BattleState.BattleOver;
+        playerParty.Enemies.ForEach(p => p.OnBattleOver());
+        OnBattleOver(won);
+    }
+    
+    void ActionSelection()
+    {
+        state = BattleState.ActionSelection;
+        dialogBox.SetDialog("Choose an action");
         dialogBox.EnableActionSelector(true);
     }
-
-    void PlayerMove()
+    
+    void OpenPartyScreen()
     {
-        state = BattleState.PlayerMove;
+        state = BattleState.PartyScreen;
+        partyScreen.SetPartyData(playerParty.Enemies);
+        partyScreen.gameObject.SetActive(true);
+    }
+
+    void MoveSelection()
+    {
+        state = BattleState.MoveSelection;
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
     }
 
-    IEnumerator PerformPlayerMove()
+    IEnumerator PlayerMove()
     {
-        state = BattleState.Busy;
+        state = BattleState.PerformMove;
 
         var move = playerUnit.Enemy.Moves[currentMove];
-        yield return dialogBox.TypeDialog($"{playerUnit.Enemy.Base.Name} used {move.Base.Name}");
+        yield return RunMove(playerUnit, enemyUnit, move);
 
-        playerUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(1f);
-
-        enemyUnit.PlayHitAnimation();
-        var damageDetails = enemyUnit.Enemy.TakeDamage(move, playerUnit.Enemy);
-        yield return enemyHud.UpdateHP();
-        yield return ShowDamageDetails(damageDetails);
-
-        if (damageDetails.Fainted)
-        {
-            yield return dialogBox.TypeDialog($"{enemyUnit.Enemy.Base.Name} Fainted");
-            enemyUnit.PlayFaintAnimation();
-        }
-        else
+        //If the battle state wasn't changed by RunMove, then go to next step
+        if (state == BattleState.PerformMove)
         {
             StartCoroutine(EnemyMove());
         }
@@ -78,27 +97,167 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyMove()
     {
-        state = BattleState.EnemyMove;
+        state = BattleState.PerformMove;
 
         var move = enemyUnit.Enemy.GetRandomMove();
-        yield return dialogBox.TypeDialog($"{enemyUnit.Enemy.Base.Name} used {move.Base.Name}");
+        yield return RunMove(enemyUnit, playerUnit, move);
 
-        enemyUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(1f);
-
-        playerUnit.PlayHitAnimation();
-        var damageDetails = playerUnit.Enemy.TakeDamage(move, playerUnit.Enemy);
-        yield return playerHud.UpdateHP();
-        yield return ShowDamageDetails(damageDetails);
-
-        if (damageDetails.Fainted)
+        //If the battle state wasn't changed by RunMove, then go to next step
+        if (state == BattleState.PerformMove)
         {
-            yield return dialogBox.TypeDialog($"{playerUnit.Enemy.Base.Name} Fainted");
-            playerUnit.PlayFaintAnimation();
+            ActionSelection();
+        }
+    }
+
+    IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move)
+    {
+        bool canRunMove = sourceUnit.Enemy.OnBeforeMove();
+        if (!canRunMove)
+        {
+            yield return ShowStatusChanges(sourceUnit.Enemy);
+            yield return sourceUnit.Hud.UpdateHP();
+            yield break;
+        }
+        
+        move.PP--;
+        yield return dialogBox.TypeDialog($"{sourceUnit.Enemy.Base.Name} used {move.Base.Name}");
+
+        if (CheckIfMoveHits(move, sourceUnit.Enemy, targetUnit.Enemy))
+        {
+
+            sourceUnit.PlayAttackAnimation();
+            yield return new WaitForSeconds(1f);
+            targetUnit.PlayHitAnimation();
+
+            if (move.Base.Category == MoveCategory.Status)
+            {
+                yield return RunMoveEffects(move.Base.Effects, sourceUnit.Enemy, targetUnit.Enemy, move.Base.Target);
+            }
+            else
+            {
+                var damageDetails = targetUnit.Enemy.TakeDamage(move, sourceUnit.Enemy);
+                yield return targetUnit.Hud.UpdateHP();
+                yield return ShowDamageDetails(damageDetails);
+            }
+            
+            if (move.Base.Secondaries != null && move.Base.Secondaries.Count > 0 && targetUnit.Enemy.HP > 0)
+            {
+                foreach (var secondary in move.Base.Secondaries)
+                {
+                    var rnd = UnityEngine.Random.Range(1, 101);
+                    if (rnd <= secondary.Chance)
+                        yield return RunMoveEffects(secondary, sourceUnit.Enemy, targetUnit.Enemy, secondary.Target);
+                }
+            }
+
+            if (targetUnit.Enemy.HP <= 0)
+            {
+                yield return dialogBox.TypeDialog($"{targetUnit.Enemy.Base.Name} Fainted");
+                targetUnit.PlayFaintAnimation();
+
+                yield return new WaitForSeconds(2f);
+
+                CheckForBattleOver(targetUnit);
+            }
         }
         else
         {
-            PlayerAction();
+            yield return dialogBox.TypeDialog($"{sourceUnit.Enemy.Base.Name}'s attack missed");
+        }
+
+        //Status like burn or COVID will hurt player/enemy after turn
+        sourceUnit.Enemy.OnAfterTurn();
+        yield return ShowStatusChanges(sourceUnit.Enemy);
+        yield return sourceUnit.Hud.UpdateHP();
+        if (sourceUnit.Enemy.HP <= 0)
+        {
+            yield return dialogBox.TypeDialog($"{targetUnit.Enemy.Base.Name} Fainted");
+            sourceUnit.PlayFaintAnimation();
+            
+            yield return new WaitForSeconds(2f);
+            
+            CheckForBattleOver(sourceUnit);
+        }
+    }
+    
+    IEnumerator RunMoveEffects(MoveEffects effects, Enemy source, Enemy target, MoveTarget moveTarget)
+    {
+        // Stat Boosting
+        if (effects.Boosts != null)
+        {
+            if (moveTarget == MoveTarget.Self)
+                source.ApplyBoosts(effects.Boosts);
+            else
+                target.ApplyBoosts(effects.Boosts);
+        }
+        
+        // Status Condition
+        if (effects.Status != ConditionID.none)
+        {
+            target.SetStatus(effects.Status);
+        }
+        
+        // Volatile Status Condition
+        if (effects.VolatileStatus != ConditionID.none)
+        {
+            target.SetVolatileStatus(effects.VolatileStatus);
+        }
+
+        yield return ShowStatusChanges(source);
+        yield return ShowStatusChanges(target);
+    }
+    
+    bool CheckIfMoveHits(Move move, Enemy source, Enemy target)
+    {
+        if (move.Base.AlwaysHits)
+            return true;
+
+        float moveAccuracy = move.Base.Accuracy;
+
+        int accuracy = source.StatBoosts[Stat.Accuracy];
+        int evasion = target.StatBoosts[Stat.Evasion];
+
+        var boostValues = new float[] { 1f, 4f / 3f, 5f / 3f, 2f, 7f / 3f, 8f / 3f, 3f };
+
+        if (accuracy > 0)
+            moveAccuracy *= boostValues[accuracy];
+        else
+            moveAccuracy /= boostValues[-accuracy];
+
+        if (evasion > 0)
+            moveAccuracy /= boostValues[evasion];
+        else
+            moveAccuracy *= boostValues[-evasion];
+
+        return UnityEngine.Random.Range(1, 101) <= moveAccuracy;
+    }
+    
+    IEnumerator ShowStatusChanges(Enemy enemy)
+    {
+        while (enemy.StatusChanges.Count > 0)
+        {
+            var message = enemy.StatusChanges.Dequeue();
+            yield return dialogBox.TypeDialog(message);
+        }
+    }
+
+    void CheckForBattleOver(BattleUnit faintedUnit)
+    {
+        if (faintedUnit.IsPlayerUnit)
+        {
+            var nextPartyMember = playerParty.GetHealthyMember();
+            if (nextPartyMember != null)
+            {
+                OpenPartyScreen();
+            }
+            else
+            {
+                BattleOver(false);
+            }
+        }
+        else
+        {
+            BattleOver(true);
         }
     }
 
@@ -110,33 +269,37 @@ public class BattleSystem : MonoBehaviour
         if (damageDetails.TypeEffectiveness > 1f)
             yield return dialogBox.TypeDialog("It's super effective!");
         else if (damageDetails.TypeEffectiveness < 1f)
-            yield return dialogBox.TypeDialog("It's not very effective!");
+            yield return dialogBox.TypeDialog("It's not very effective...");
     }
 
-    private void Update()
+    public void HandleUpdate()
     {
-        if (state == BattleState.PlayerAction)
+        if (state == BattleState.ActionSelection)
         {
             HandleActionSelection();
         }
-        else if (state == BattleState.PlayerMove)
+        else if (state == BattleState.MoveSelection)
         {
             HandleMoveSelection();
+        }
+        else if (state == BattleState.PartyScreen)
+        {
+            HandlePartySelection();
         }
     }
 
     void HandleActionSelection()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (currentAction < 1)
-                ++currentAction;
-        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+            ++currentAction;
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            --currentAction;
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+            currentAction += 2;
         else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (currentAction > 0)
-                --currentAction;
-        }
+            currentAction -= 2;
+
+        currentAction = Mathf.Clamp(currentAction, 0, 3);
 
         dialogBox.UpdateActionSelection(currentAction);
 
@@ -145,9 +308,18 @@ public class BattleSystem : MonoBehaviour
             if (currentAction == 0)
             {
                 // Fight
-                PlayerMove();
+                MoveSelection();
             }
             else if (currentAction == 1)
+            {
+                // Bag
+            }
+            else if (currentAction == 2)
+            {
+                // Party
+                OpenPartyScreen();
+            }
+            else if (currentAction == 3)
             {
                 // Run
             }
@@ -157,25 +329,15 @@ public class BattleSystem : MonoBehaviour
     void HandleMoveSelection()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (currentMove < playerUnit.Enemy.Moves.Count - 1)
-                ++currentMove;
-        }
+            ++currentMove;
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (currentMove > 0)
-                --currentMove;
-        }
+            --currentMove;
         else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (currentMove < playerUnit.Enemy.Moves.Count - 2)
-                currentMove += 2;
-        }
+            currentMove += 2;
         else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (currentMove > 1)
-                currentMove -= 2;
-        }
+            currentMove -= 2;
+
+        currentMove = Mathf.Clamp(currentMove, 0, playerUnit.Enemy.Moves.Count - 1);
 
         dialogBox.UpdateMoveSelection(currentMove, playerUnit.Enemy.Moves[currentMove]);
 
@@ -183,7 +345,73 @@ public class BattleSystem : MonoBehaviour
         {
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
-            StartCoroutine(PerformPlayerMove());
+            StartCoroutine(PlayerMove());
         }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            dialogBox.EnableMoveSelector(false);
+            dialogBox.EnableDialogText(true);
+            ActionSelection();
+        }
+    }
+    
+    void HandlePartySelection()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+            ++currentMember;
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            --currentMember;
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+            currentMember += 2;
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+            currentMember -= 2;
+
+        currentMember = Mathf.Clamp(currentMember, 0, playerParty.Enemies.Count - 1);
+
+        partyScreen.UpdateMemberSelection(currentMember);
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            var selectedMember = playerParty.Enemies[currentMember];
+            if (selectedMember.HP <= 0)
+            {
+                partyScreen.SetMessageText("A voice whispered: They've fainted, they can't come out.");
+                return;
+            }
+            if (selectedMember == playerUnit.Enemy)
+            {
+                partyScreen.SetMessageText("A voice whispered: They're already on the battlefield!");
+                return;
+            }
+
+            partyScreen.gameObject.SetActive(false);
+            state = BattleState.Busy;
+            StartCoroutine(SwitchPartyMember(selectedMember));
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            partyScreen.gameObject.SetActive(false);
+            ActionSelection();
+        }
+    }
+
+    IEnumerator SwitchPartyMember(Enemy newMember)
+    {
+        bool currentMemberFainted = true;
+        if (playerUnit.Enemy.HP > 0)
+        {
+            currentMemberFainted = false;
+            yield return dialogBox.TypeDialog($"{playerUnit.Enemy.Base.Name}: I'm getting out of here!");
+            playerUnit.PlayFaintAnimation();
+            yield return new WaitForSeconds(2f);
+        }
+
+        playerUnit.Setup(newMember);
+        dialogBox.SetMoveNames(newMember.Moves);
+        yield return dialogBox.TypeDialog($"{newMember.Base.Name}: I'm ready!");
+        if (currentMemberFainted)
+            ChooseFirstTurn();
+        else
+            StartCoroutine(EnemyMove());
     }
 }

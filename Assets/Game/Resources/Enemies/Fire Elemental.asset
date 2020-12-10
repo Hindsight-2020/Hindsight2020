@@ -22,16 +22,16 @@ MonoBehaviour:
   type2: 0
   maxHp: 150
   attack: 15
-  defense: 5
+  defense: 10
   spAttack: 20
   spDefense: 10
   speed: 15
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 4e1481909d56b9242a049dea76636038, type: 2}
-    level: 0
+    level: 1
+  - moveBase: {fileID: 11400000, guid: aeaad7ca54e0e417488623cd3e654adc, type: 2}
+    level: 5
   - moveBase: {fileID: 11400000, guid: bbaff767fc5b8df4f879ef434e36c1a5, type: 2}
-    level: 10
-  - moveBase: {fileID: 11400000, guid: 3cc9ab2e4e8700c40848b836db6c5af0, type: 2}
     level: 20
   - moveBase: {fileID: 11400000, guid: 163a3f56e65b76e43bf65174b96bb4aa, type: 2}
-    level: 35
+    level: 20

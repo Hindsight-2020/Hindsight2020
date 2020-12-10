@@ -16,6 +16,16 @@ MonoBehaviour:
   description: Wraps layers upon layers of toilet paper around the creature. Raises
     defense and lowers attack and speed.
   type: 1
-  power: 40
+  power: 0
   accuracy: 100
   pp: 10
+  category: 2
+  effects:
+    boosts:
+    - stat: 1
+      boost: 1
+    - stat: 0
+      boost: -1
+    - stat: 4
+      boost: -1
+  target: 1

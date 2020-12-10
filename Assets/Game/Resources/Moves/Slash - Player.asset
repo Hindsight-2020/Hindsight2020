@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Slash - Player
   m_EditorClassIdentifier: 
   name: Slash
-  description: Slash your foes with your trusty sword.
+  description: Slash your foes with your trusty sword crafted from a murder hornet's
+    stinger.
   type: 5
   power: 35
   accuracy: 85

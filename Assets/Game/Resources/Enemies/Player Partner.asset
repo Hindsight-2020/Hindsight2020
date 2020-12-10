@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbf14463cb6b754289f1a8613c9c230, type: 3}
+  m_Name: Player Partner
+  m_EditorClassIdentifier: 
+  name: Cameron
+  description: A friend you picked up along the way
+  frontSprite: {fileID: 0}
+  backSprite: {fileID: 21300000, guid: 086426e3ace9b4866a2a2bf42452a9a1, type: 3}
+  type1: 0
+  type2: 0
+  maxHp: 100
+  attack: 20
+  defense: 20
+  spAttack: 20
+  spDefense: 20
+  speed: 20
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 40ede68458b34b74a819dfc3f3334ae5, type: 2}
+    level: 0
+  - moveBase: {fileID: 11400000, guid: 37483741fdaab4f90b6de1635215c206, type: 2}
+    level: 0
+  - moveBase: {fileID: 11400000, guid: da733f79035f24d31b08f4a7e0dbaa95, type: 2}
+    level: 0
+  - moveBase: {fileID: 11400000, guid: 554ef2cc4f01d4f9cb512acfb91dfa3f, type: 2}
+    level: 0

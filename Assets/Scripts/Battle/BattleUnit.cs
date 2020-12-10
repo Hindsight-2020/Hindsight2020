@@ -6,10 +6,19 @@ using DG.Tweening;
 
 public class BattleUnit : MonoBehaviour
 {
-    [SerializeField] EnemyBase _base;
-    [SerializeField] int level;
     [SerializeField] bool isPlayerUnit;
+    [SerializeField] BattleHud hud;
 
+    public bool IsPlayerUnit
+    {
+        get { return isPlayerUnit; }
+    }
+
+    public BattleHud Hud
+    {
+        get { return hud; }
+    }
+    
     public Enemy Enemy { get; set; }
     
     Image image;
@@ -23,14 +32,17 @@ public class BattleUnit : MonoBehaviour
         originalColor = image.color;
     }
 
-    public void Setup()
+    public void Setup(Enemy enemy)
     {
-        Enemy = new Enemy(_base, level);
+        Enemy = enemy;
         if (isPlayerUnit)
             image.sprite = Enemy.Base.BackSprite;
         else
             image.sprite = Enemy.Base.FrontSprite;
-
+        
+        hud.SetData(enemy);
+        
+        image.color = originalColor;
         PlayEnterAnimation();
     }
 

@@ -105,6 +105,19 @@ public enum EnemyType
     Bug,
 }
 
+public enum Stat
+{
+    Attack,
+    Defense,
+    SpAttack,
+    SpDefense,
+    Speed,
+    
+    //Not actual stats, used to boost the moveAccuracy
+    Accuracy,
+    Evasion
+}
+
 public class TypeChart
 {
     static float[][] chart =

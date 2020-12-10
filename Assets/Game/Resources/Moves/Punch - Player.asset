@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Punch - Player
   m_EditorClassIdentifier: 
   name: Punch
-  description: A standard punch. Not too strong, but quite accurate.
+  description: Perform a powerful punch to impact and stagger your enemies.
   type: 1
-  power: 30
+  power: 45
   accuracy: 90
-  pp: 25
+  pp: 20

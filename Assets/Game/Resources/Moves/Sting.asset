@@ -15,6 +15,6 @@ MonoBehaviour:
   name: Sting
   description: OW!
   type: 5
-  power: 50
+  power: 30
   accuracy: 70
   pp: 30
